@@ -1,0 +1,19 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./notes.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client" // https://github.com/prisma/prisma/issues/2584#issuecomment-646414549
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  note      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
