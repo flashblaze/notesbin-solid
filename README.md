@@ -1,4 +1,4 @@
-# Solid Notesbin
+# Notesbin Solid
 
 :construction: This is an extremely WIP project by rebuilding my note sharing project [notesbin](github.com/flashblaze/notesbin) to learn [Solid Start](https://start.solidjs.com/getting-started/what-is-solidstart) and [Prisma](https://www.prisma.io). Currently I haven't decided on the DB yet, but I'll probably go with [PlanetScale](https://planetscale.com/).
 

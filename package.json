@@ -1,5 +1,5 @@
 {
-  "name": "solid-notesbin",
+  "name": "notesbin-solid",
   "scripts": {
     "dev": "solid-start dev",
     "build": "solid-start build",
