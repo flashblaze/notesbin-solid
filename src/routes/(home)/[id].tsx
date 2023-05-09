@@ -1,5 +1,5 @@
 import "highlight.js/styles/atom-one-dark.css";
-import { A, RouteDataArgs, useRouteData } from "solid-start";
+import { RouteDataArgs, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import { getNote } from "~/db/session";
 import hljs from "highlight.js";
@@ -23,7 +23,7 @@ const Note = () => {
   const data = useRouteData<typeof routeData>();
   return (
     <>
-      <pre innerHTML={data()?.note} />
+      <pre innerHTML={data()?.note} class="bg-background w-full text-white" />
     </>
   );
 };
