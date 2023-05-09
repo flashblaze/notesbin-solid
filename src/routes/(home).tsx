@@ -1,9 +1,9 @@
 import { createServerAction$, redirect } from "solid-start/server";
 import { FormError } from "solid-start/data";
 import { insertNote } from "~/db/session";
-import Editor from "~/components/Editor";
 import Sidebar from "~/components/Sidebar";
 import Header from "~/components/Header";
+import { Outlet } from "solid-start";
 
 export default function Home() {
   const [, { Form }] = createServerAction$(async (form: FormData) => {
@@ -23,7 +23,7 @@ export default function Home() {
         <Header />
         <div class="flex">
           <Sidebar />
-          <Editor />
+          <Outlet />
         </div>
       </div>
     </Form>

@@ -24,9 +24,6 @@ const Note = () => {
   return (
     <>
       <pre innerHTML={data()?.note} />
-      <div>
-        <A href="/">Create a new note</A>
-      </div>
     </>
   );
 };
