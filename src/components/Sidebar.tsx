@@ -3,6 +3,11 @@ const Sidebar = () => (
     <button name="submit" type="submit">
       Save
     </button>
+    <button name="submit">Copy link</button>
+    <button name="submit">Copy note</button>
+    <button name="submit">Duplicate and edit</button>
+    <button name="submit">Saved notes</button>
+    <button name="submit">About</button>
   </nav>
 );
 

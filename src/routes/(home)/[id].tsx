@@ -22,9 +22,10 @@ export function routeData({ params }: RouteDataArgs) {
 const Note = () => {
   const data = useRouteData<typeof routeData>();
   return (
-    <>
-      <pre innerHTML={data()?.note} class="bg-background w-full text-white" />
-    </>
+    <pre
+      innerHTML={data()?.note}
+      class="h-[calc(100vh-64px)] w-[calc(100vw-64px)] p-2 bg-background text-white"
+    />
   );
 };
 
