@@ -1,6 +1,6 @@
 import "highlight.js/styles/atom-one-dark.css";
 import { RouteDataArgs, useRouteData } from "solid-start";
-import { createServerData$ } from "solid-start/server";
+import { createServerData$, redirect } from "solid-start/server";
 import { getNote } from "~/db/session";
 import hljs from "highlight.js";
 
@@ -12,6 +12,8 @@ export function routeData({ params }: RouteDataArgs) {
         data.note = hljs.highlightAuto(data.note).value;
         return data;
       }
+
+      throw redirect("/");
     },
     {
       key: () => ["note", params.id],
