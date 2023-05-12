@@ -1,13 +1,31 @@
 import { useParams } from "@solidjs/router";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
+import { noteStore } from "~/store";
 
 const Sidebar = () => {
   const params = useParams<{ id: string }>();
-  const [isId, _] = createSignal(Boolean(params.id));
+  const [isId, setIsId] = createSignal(true);
+
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+  };
+
+  const handleCopyNote = async () => {
+    await navigator.clipboard.writeText(noteStore.note);
+  };
+
+  createEffect(() => {
+    setIsId(Boolean(params.id));
+  });
 
   return (
     <nav class="bg-sidebar text-white h-[calc(100vh-64px)] w-16 flex flex-col items-center">
-      <button class="btn btn-ghost" name="submit" type="submit" title="Save">
+      <button
+        class={`${isId() && "btn-disabled"} btn btn-ghost`}
+        name="submit"
+        type="submit"
+        title="Save"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-device-floppy"
@@ -29,6 +47,7 @@ const Sidebar = () => {
       <button
         class={`${!isId() && "btn-disabled"} btn btn-ghost mt-3`}
         title="Copy link"
+        onClick={handleCopyLink}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -51,6 +70,7 @@ const Sidebar = () => {
       <button
         class={`${!isId() && "btn-disabled"} btn btn-ghost mt-3`}
         title="Copy note"
+        onClick={handleCopyNote}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

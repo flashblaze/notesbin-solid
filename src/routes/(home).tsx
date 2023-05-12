@@ -1,6 +1,6 @@
 import { createServerAction$, redirect } from "solid-start/server";
 import { FormError } from "solid-start/data";
-import { insertNote } from "~/db/session";
+import { insertNote } from "~/db/notes";
 import Sidebar from "~/components/Sidebar";
 import Header from "~/components/Header";
 import { Outlet } from "solid-start";
@@ -13,7 +13,7 @@ export default function Home() {
       throw new FormError(`Form not submitted correctly.`);
     }
 
-    const data = await insertNote({ note });
+    const data = await insertNote(note);
     return redirect(`/${data.id}`);
   });
 

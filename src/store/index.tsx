@@ -1,5 +1,5 @@
-import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
 
-export const [noteStore, setNoteStore] = createSignal({
+export const [noteStore, setNoteStore] = createStore({
   note: "",
 });
