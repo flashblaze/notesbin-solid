@@ -10,7 +10,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client" // https://github.com/prisma/prisma/issues/2584#issuecomment-646414549
+  // output   = "../node_modules/.prisma/client" // https://github.com/prisma/prisma/issues/2584#issuecomment-646414549
 }
 
 model Note {
