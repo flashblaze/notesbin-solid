@@ -4,7 +4,9 @@
     "dev": "solid-start dev",
     "build": "solid-start build",
     "start": "solid-start start",
-    "studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push"
   },
   "type": "module",
   "devDependencies": {
