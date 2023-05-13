@@ -7,7 +7,7 @@
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "postinstall": "pnpx prisma generate"
+    "postinstall": "prisma generate"
   },
   "type": "module",
   "devDependencies": {
