@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { createEffect, createSignal } from "solid-js";
 import { Icon } from "@iconify-icon/solid";
 import { toast } from "solid-sonner";
-import { hasContent } from "../../lib/store";
+import { hasContent, note } from "../../lib/store";
 
 type SidebarProps = {
   pending?: boolean;
@@ -31,7 +31,7 @@ const Sidebar = (props: SidebarProps) => {
 
   const copyText = () => {
     try {
-      navigator.clipboard.writeText("Hello, world!");
+      navigator.clipboard.writeText(note());
       toast.success("Content copied to clipboard");
     } catch (error) {
       toast.error("Error while copying content");

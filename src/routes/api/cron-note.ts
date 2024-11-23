@@ -4,18 +4,24 @@ import { createDb } from "~/db/index";
 import { notes } from "~/db/schema";
 
 export async function GET({ request }: { request: Request }) {
-  const headers = request.headers;
-  const cronSecret = headers.get("cron-secret");
-
-  if (cronSecret !== process.env.CRON_SECRET) {
-    return new Response("Unauthorized", { status: 401 });
-  }
-
   const event = getRequestEvent();
+  const cronSecret =
+    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+    process.env.DATABASE_URL ??
+    "";
   const dbUrl =
     event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
     process.env.DATABASE_URL ??
     "";
+
+  const headers = request.headers;
+  const requestCronSecret = headers.get("cron-secret");
+
+  if (requestCronSecret !== cronSecret) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+    });
+  }
 
   const db = createDb(dbUrl);
   const createdNote = await db

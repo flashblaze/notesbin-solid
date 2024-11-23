@@ -16,7 +16,7 @@ export const getNote = query(async ({ id }: { id: string }) => {
   const db = createDb(dbUrl);
   const data = await db.select().from(notes).where(eq(notes.id, id));
   const note = hljs.highlightAuto(data[0]?.note ?? "");
-  return note.value;
+  return { html: note.value, data: data[0] };
 }, "note");
 
 export const createNote = action(async (formData: FormData) => {
