@@ -7,13 +7,18 @@
     "start": "vinxi start",
     "prisma:gen": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "node:start": "node -r dotenv/config .output/server/index.mjs"
+    "node:start": "node -r dotenv/config .output/server/index.mjs",
+    "preview": "pnpm run build && npx wrangler dev",
+    "deploy": "pnpm run build && wrangler deploy"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241112.0",
+    "@iconify-icon/solid": "^2.1.1",
     "@types/node": "^20.12.7",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15"
+    "tailwindcss": "^3.4.15",
+    "wrangler": "^3.90.0"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.1.1",
@@ -29,6 +34,7 @@
     "highlight.js": "^11.10.0",
     "prisma": "^5.12.1",
     "solid-js": "^1.9.2",
+    "solid-sonner": "^0.2.8",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "vinxi": "^0.4.3"
