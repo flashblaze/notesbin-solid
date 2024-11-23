@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { createEffect, createSignal } from "solid-js";
 import { Icon } from "@iconify-icon/solid";
 import { toast } from "solid-sonner";
+import { hasContent } from "../../lib/store";
 
 type SidebarProps = {
   pending?: boolean;
@@ -11,9 +12,11 @@ type SidebarProps = {
 const Sidebar = (props: SidebarProps) => {
   const location = useLocation();
   const [disableCopy, setDisableCopy] = createSignal(false);
+  const [disableSave, setDisableSave] = createSignal(false);
 
   createEffect(() => {
     setDisableCopy(location.pathname == "/");
+    setDisableSave(!hasContent());
   });
 
   const copyUrl = () => {
@@ -40,7 +43,7 @@ const Sidebar = (props: SidebarProps) => {
     <aside class="w-16 h-[calc(100vh-64px)] flex flex-col items-center bg-zinc-950 text-white gap-4">
       <Button
         size="sm"
-        disabled={props.pending || !disableCopy()}
+        disabled={props.pending || !disableCopy() || disableSave()}
         type="submit"
         variant="ghost"
       >
