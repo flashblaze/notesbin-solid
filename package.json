@@ -1,36 +1,25 @@
 {
-  "name": "notesbin-solid",
-  "scripts": {
-    "dev": "solid-start dev",
-    "build": "solid-start build",
-    "start": "solid-start start",
-    "prisma:studio": "prisma studio",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push",
-    "postinstall": "prisma generate"
-  },
+  "name": "example-with-prisma",
   "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start",
+    "prisma:gen": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.23",
-    "prisma": "^4.14.0",
-    "solid-start-node": "^0.2.26",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.5"
+    "@types/node": "^20.12.7"
   },
   "dependencies": {
-    "@prisma/client": "^4.14.0",
-    "@solidjs/meta": "^0.28.5",
-    "@solidjs/router": "^0.8.2",
-    "daisyui": "^2.51.6",
-    "highlight.js": "^11.8.0",
-    "solid-js": "^1.7.5",
-    "solid-start": "^0.2.26",
-    "solid-start-vercel": "^0.2.26",
-    "undici": "^5.22.0"
+    "@prisma/client": "^5.12.1",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.0.10",
+    "prisma": "^5.12.1",
+    "solid-js": "^1.9.2",
+    "vinxi": "^0.4.3"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   }
 }

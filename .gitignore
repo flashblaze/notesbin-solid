@@ -4,7 +4,12 @@ dist
 .output
 .vercel
 .netlify
-netlify
+.vinxi
+app.config.timestamp_*.js
+
+# Environment
+.env
+.env*.local
 
 # dependencies
 /node_modules
@@ -22,5 +27,3 @@ gitignore
 # System Files
 .DS_Store
 Thumbs.db
-
-.env
