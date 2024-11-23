@@ -42,8 +42,8 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
         run: |
-          pnpm run prisma:gen
-          pnpm run prisma:migrate
+          pnpm run db:generate
+          pnpm run db:migrate
 
       - name: Build application
         run: pnpm run build

@@ -1,17 +1,34 @@
 import { action, query, redirect } from "@solidjs/router";
-import { db } from "./db";
+import { createDb } from "../db/index";
 import hljs from "highlight.js";
+import { getRequestEvent } from "solid-js/web";
+import { eq } from "drizzle-orm";
+import { notes } from "~/db/schema";
 
 export const getNote = query(async ({ id }: { id: string }) => {
   "use server";
-  const data = await db.note.findFirst({ where: { id } });
-  const note = hljs.highlightAuto(data?.note ?? "");
+  const event = getRequestEvent();
+  const dbUrl =
+    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+    process.env.DATABASE_URL ??
+    "";
+
+  const db = createDb(dbUrl);
+  const data = await db.select().from(notes).where(eq(notes.id, id));
+  const note = hljs.highlightAuto(data[0]?.note ?? "");
   return note.value;
 }, "note");
 
 export const createNote = action(async (formData: FormData) => {
   "use server";
   const content = String(formData.get("note"));
-  const note = await db.note.create({ data: { note: content } });
-  return redirect(`/${note.id}`);
+  const event = getRequestEvent();
+  const dbUrl =
+    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+    process.env.DATABASE_URL ??
+    "";
+
+  const db = createDb(dbUrl);
+  const note = await db.insert(notes).values({ note: content }).returning();
+  return redirect(`/${note[0].id}`);
 });

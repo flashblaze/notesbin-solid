@@ -1,4 +1,7 @@
-import { db } from "~/lib/db";
+import { eq } from "drizzle-orm";
+import { getRequestEvent } from "solid-js/web";
+import { createDb } from "~/db/index";
+import { notes } from "~/db/schema";
 
 export async function GET({ request }: { request: Request }) {
   const headers = request.headers;
@@ -8,17 +11,23 @@ export async function GET({ request }: { request: Request }) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const createdNote = await db.note.create({
-    data: {
+  const event = getRequestEvent();
+  const dbUrl =
+    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+    process.env.DATABASE_URL ??
+    "";
+
+  const db = createDb(dbUrl);
+  const createdNote = await db
+    .insert(notes)
+    .values({
       note: "Hello, world!",
-    },
-  });
+    })
+    .returning();
 
-  await db.note.delete({
-    where: {
-      id: createdNote.id,
-    },
+  const [newNote] = createdNote;
+  await db.delete(notes).where(eq(notes.id, newNote.id));
+  return new Response(JSON.stringify({ id: newNote.id }), {
+    status: 200,
   });
-
-  return new Response(JSON.stringify({ id: createdNote.id }), { status: 200 });
 }
