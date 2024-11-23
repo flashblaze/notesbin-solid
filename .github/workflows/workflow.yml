@@ -38,7 +38,12 @@ jobs:
         run: pnpm install
 
       - name: Prisma generate and migrate
-        run: pnpm run prisma:gen && pnpm run prisma:migrate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+        run: |
+          pnpm run prisma:gen
+          pnpm run prisma:migrate
 
       - name: Build application
         run: pnpm run build
