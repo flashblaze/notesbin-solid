@@ -1,17 +1,24 @@
-import { createAsync, type RouteDefinition } from "@solidjs/router";
-import { getNote } from "~/lib";
+import { Title } from "@solidjs/meta";
 
-export const route = {
-  preload() {
-    getNote();
-  },
-} satisfies RouteDefinition;
+import Editor from "~/components/ui/Editor";
+import Header from "~/components/ui/Header";
+import Sidebar from "~/components/ui/Sidebar";
 
-export default function Home() {
-  const note = createAsync(() => getNote(), { deferStream: true });
+const Home = () => {
   return (
-    <main class="w-full p-4 space-y-2">
-      <h2 class="font-bold text-3xl">Hello {note()?.note}</h2>
-    </main>
+    <>
+      <Title>notesbin</Title>
+      <main class="w-full space-y-2">
+        <section class="w-full flex flex-col">
+          <Header />
+          <div class="flex">
+            <Sidebar />
+            <Editor />
+          </div>
+        </section>
+      </main>
+    </>
   );
-}
+};
+
+export default Home;
