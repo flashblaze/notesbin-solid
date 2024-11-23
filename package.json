@@ -5,7 +5,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "prisma:gen": "prisma generate",
+    "prisma:gen": "prisma generate --data-proxy",
     "prisma:migrate": "prisma migrate dev",
     "node:start": "node -r dotenv/config .output/server/index.mjs",
     "preview": "pnpm run build && npx wrangler dev",
