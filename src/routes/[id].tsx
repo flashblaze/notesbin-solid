@@ -1,6 +1,5 @@
 import { createAsync, RouteDefinition, useParams } from "@solidjs/router";
 import { getNote } from "~/lib";
-import "highlight.js/styles/atom-one-dark.css";
 import { Title } from "@solidjs/meta";
 import { setNote } from "~/lib/store";
 

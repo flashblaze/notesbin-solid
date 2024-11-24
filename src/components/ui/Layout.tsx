@@ -3,6 +3,7 @@ import { JSX } from "solid-js";
 import { createNote } from "~/lib";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import "highlight.js/styles/atom-one-dark.css";
 
 type LayoutProps = {
   children: JSX.Element;
