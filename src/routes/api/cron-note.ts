@@ -6,7 +6,7 @@ import { notes } from "~/db/schema";
 export async function GET({ request }: { request: Request }) {
   const event = getRequestEvent();
   const cronSecret =
-    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+    event?.nativeEvent.context.cloudflare.env.CRON_SECRET ??
     process.env.DATABASE_URL ??
     "";
   const dbUrl =
