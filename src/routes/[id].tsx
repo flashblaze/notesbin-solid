@@ -1,7 +1,7 @@
 import { createAsync, RouteDefinition, useParams } from "@solidjs/router";
 import { getNote } from "~/lib";
 import { Title } from "@solidjs/meta";
-import { setNote } from "~/lib/store";
+import { setHasContent, setNote } from "~/lib/store";
 
 export const route: RouteDefinition = {
   preload: ({ params }) => {
@@ -13,6 +13,7 @@ const Note = () => {
   const params = useParams();
   const note = createAsync(() => getNote({ id: params.id }));
   setNote(note()?.data?.note ?? "");
+  setHasContent(false);
   return (
     <>
       <Title>Custom Note</Title>

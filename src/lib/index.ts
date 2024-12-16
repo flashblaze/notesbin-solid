@@ -8,10 +8,11 @@ import { notes } from "~/db/schema";
 export const getNote = query(async ({ id }: { id: string }) => {
   "use server";
   const event = getRequestEvent();
-  const dbUrl =
-    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
-    process.env.DATABASE_URL ??
-    "";
+  const dbUrl = import.meta.env.DEV
+    ? (process.env.DATABASE_URL as string)
+    : event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+      process.env.DATABASE_URL ??
+      "";
 
   const db = createDb(dbUrl);
   const data = await db.select().from(notes).where(eq(notes.id, id));
@@ -23,10 +24,11 @@ export const createNote = action(async (formData: FormData) => {
   "use server";
   const content = String(formData.get("note"));
   const event = getRequestEvent();
-  const dbUrl =
-    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
-    process.env.DATABASE_URL ??
-    "";
+  const dbUrl = import.meta.env.DEV
+    ? (process.env.DATABASE_URL as string)
+    : event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+      process.env.DATABASE_URL ??
+      "";
 
   const db = createDb(dbUrl);
   const note = await db.insert(notes).values({ note: content }).returning();

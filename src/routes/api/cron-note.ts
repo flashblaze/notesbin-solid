@@ -5,14 +5,16 @@ import { notes } from "~/db/schema";
 
 export async function GET({ request }: { request: Request }) {
   const event = getRequestEvent();
-  const cronSecret =
-    event?.nativeEvent.context.cloudflare.env.CRON_SECRET ??
-    process.env.DATABASE_URL ??
-    "";
-  const dbUrl =
-    event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
-    process.env.DATABASE_URL ??
-    "";
+  const cronSecret = import.meta.env.DEV
+    ? (process.env.CRON_SECRET as string)
+    : event?.nativeEvent.context.cloudflare.env.CRON_SECRET ??
+      process.env.CRON_SECRET ??
+      "";
+  const dbUrl = import.meta.env.DEV
+    ? (process.env.DATABASE_URL as string)
+    : event?.nativeEvent.context.cloudflare.env.DATABASE_URL ??
+      process.env.DATABASE_URL ??
+      "";
 
   const headers = request.headers;
   const requestCronSecret = headers.get("cron-secret");
